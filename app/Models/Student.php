@@ -10,10 +10,13 @@ class Student extends Model
     use HasFactory;
     
     protected $primaryKey = 'student_id';
-    protected $fillable = ['user_id', 'student_number', 'biodata', 'entry_year'];
+    // In app/Models/Student.php
+    protected $fillable = ['user_id', 'student_number', 'entry_year'];
 
     public function user() {
-        return $this->belongsTo(User::class, 'user_id', 'user_id');
+        // The 2nd argument is the foreign key on this model's table (students)
+        // The 3rd argument is the primary key on the related model's table (users)
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
     public function takes() {
         return $this->hasMany(Takes::class, 'student_id', 'student_id');

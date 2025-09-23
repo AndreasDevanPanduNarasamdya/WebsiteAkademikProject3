@@ -13,13 +13,10 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id('student_id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('student_number', 20);
-            $table->text('biodata')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('student_number')->unique();
             $table->year('entry_year');
             $table->timestamps();
-            
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

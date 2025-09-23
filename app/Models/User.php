@@ -10,10 +10,26 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $primaryKey = 'user_id';
-    protected $fillable = ['username', 'password', 'role', 'full_name', 'profile_image'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'full_name', // <-- Make sure this is present
+        'email',
+        'password',
+        'role',
+        'username',
+        'profile_image',
+    ];
+
+    // ... rest of your model
 
     public function student() {
-        return $this->hasOne(Student::class, 'user_id', 'user_id');
+        // The 2nd argument is the foreign key on the students table
+        // The 3rd argument is the primary key on the users table
+        return $this->hasOne(Student::class, 'user_id', 'id');
     }
 }

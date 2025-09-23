@@ -31,7 +31,7 @@ class AdminController extends Controller
 
         if ($request->role === 'student') {
             Student::create([
-                'user_id' => $user->user_id,
+                'user_id' => $user->id, // Change this from $user->user_id
                 'student_number' => $request->student_number,
                 'entry_year' => $request->entry_year,
             ]);
